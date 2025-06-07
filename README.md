@@ -1,20 +1,138 @@
-# Spring Boot Microservices
+# 🛒 E-Commerce Microservices Platform
 
-# ATTENTION: This repository is archived, you can find the source code in the new repository that includes much more concepts and upto date - https://github.com/SaiUpadhyayula/spring-boot-3-microservices-course
+A scalable and event-driven microservices-based e-commerce application built with Spring Boot. The project is modularized into Product, Order, and Inventory services, with seamless inter-service communication and robust infrastructure features.
 
-The link to the new tutorial can be found here - https://www.youtube.com/playlist?list=PLSVW22jAG8pDeU80nDzbUgr8qqzEMppi8
+## 🔧 Tech Stack
 
-This repository contains the latest source code of the spring-boot-microservices tutorial
+- **Language & Frameworks**: Java, Spring Boot, Spring Security, Hibernate
+- **Messaging & Event-Driven Architecture**: Kafka, RabbitMQ
+- **Authentication & Authorization**: Keycloak (Role-Based Access Control)
+- **Service Discovery**: Eureka
+- **Logging & Monitoring**: Elasticsearch, Kibana
+- **Containerization**: Docker
+- **Database**: SQL
 
-You can watch the tutorial on Youtube here - https://www.youtube.com/watch?v=mPPhcU7oWDU&t=20634s
+---
 
-## How to run the application using Docker
+## 📦 Microservices Overview
 
-1. Run `mvn clean package -DskipTests` to build the applications and create the docker image locally.
-2. Run `docker-compose up -d` to start the applications.
+### 1. **Product Service**
+- Manages product catalog (add, update, view products).
+- Exposes RESTful APIs for CRUD operations.
+- Communicates with Order Service to validate product details.
 
-## How to run the application without Docker
+### 2. **Order Service**
+- Handles order placement, status tracking, and order history.
+- Listens to Kafka/RabbitMQ events to update inventory post-order.
+- Publishes events for successful order placements.
 
-1. Run `mvn clean verify -DskipTests` by going inside each folder to build the applications.
-2. After that run `mvn spring-boot:run` by going inside each folder to start the applications.
+### 3. **Inventory Service**
+- Maintains product stock information.
+- Subscribes to order events to decrement stock.
+- Publishes out-of-stock alerts via messaging queues.
+
+---
+
+## 🔐 Security
+
+- **Keycloak** for OAuth2-based authentication and authorization.
+- Role-based access implemented for admin and user privileges.
+- Secured APIs using JWT tokens.
+
+---
+
+## 🔄 Real-Time Communication
+
+- **Apache Kafka** and **RabbitMQ** handle asynchronous communication.
+- Ensures decoupled, fault-tolerant messaging between services.
+- Enables smooth order processing and inventory updates.
+
+---
+
+## 🔍 Observability
+
+- **Elasticsearch + Kibana** used for centralized logging and monitoring.
+- Logs are collected in real time for all services to trace issues effectively.
+
+---
+
+## 🐳 Deployment
+
+- Each microservice and its dependencies are containerized using **Docker**.
+- Docker Compose can be used to bring up the full infrastructure.
+
+```bash
+docker-compose up --build
+📁 Project Structure
+bash
+Copy
+Edit
+ecommerce-platform/
+├── product-service/
+├── order-service/
+├── inventory-service/
+├── config-server/ (Optional)
+├── discovery-server/ (Eureka)
+├── api-gateway/ (Optional)
+├── docker-compose.yml
+└── README.md
+🚀 Getting Started
+Prerequisites:
+Java 17+
+
+Maven
+
+Docker & Docker Compose
+
+Kafka & RabbitMQ running locally or via Docker
+
+Steps:
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/ecommerce-platform.git
+cd ecommerce-platform
+Build services:
+
+bash
+Copy
+Edit
+mvn clean install
+Run with Docker Compose:
+
+bash
+Copy
+Edit
+docker-compose up --build
+Access Keycloak at http://localhost:8080/auth
+Access services via Eureka or API Gateway
+
+✍️ Author
+Kishlay Raj
+Java Backend Developer | Passionate about scalable microservices
+📫 LinkedIn | ✉️ kishlayraj@example.com
+
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+yaml
+Copy
+Edit
+
+---
+---
+
+Let me know if you want a Docker Compose file, API endpoint documentation, or setup instructions for Keycloak too!
+
+
+Let me know if you want a Docker Compose file, API endpoint documentation, or setup instructions for Keycloak too!
+
+
+
+
+
+
+
 
